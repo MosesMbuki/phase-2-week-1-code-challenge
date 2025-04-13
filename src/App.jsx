@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import './App.css'
+import { useState, useEffect} from 'react';
+import './App.css';
 
 function App() {
-const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState([]);
   const [formData, setFormData] = useState({
     expense: '',
     description: '',
@@ -13,7 +13,7 @@ const [expenses, setExpenses] = useState([]);
 
   // Fetch expenses from db.json
   useEffect(() => {
-    fetch('http://localhost:3001/expenses')
+    fetch('http://localhost:3000/expenses')
       .then(response => response.json())
       .then(data => setExpenses(data))
       .catch(error => console.error('Error fetching data:', error));
@@ -28,7 +28,7 @@ const [expenses, setExpenses] = useState([]);
     e.preventDefault();
     
     // POST new expense to db.json
-    fetch('http://localhost:3001/expenses', {
+    fetch('http://localhost:3000/expenses', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const [expenses, setExpenses] = useState([]);
 
   const deleteExpense = (id) => {
     // DELETE expense from db.json
-    fetch(`http://localhost:3001/expenses/${id}`, {
+    fetch(`http://localhost:3000/expenses/${id}`, {
       method: 'DELETE',
     })
     .then(() => {
@@ -127,7 +127,7 @@ const [expenses, setExpenses] = useState([]);
         </div>
         
         {/* Table Section - Right Side */}
-        <div className="table-wrapper">
+        <div className="table-wrapper"> 
           <div className="relative overflow-x-auto px-4 py-8 bg-white rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -148,7 +148,7 @@ const [expenses, setExpenses] = useState([]);
                     </td>
                     <td className="px-6 py-4">{item.description}</td>
                     <td className="px-6 py-4">{item.category}</td>
-                    <td className="px-6 py-4">${item.price}</td>
+                    <td className="px-6 py-4">ksh{item.price}</td>
                     <td className="px-6 py-4">{item.date}</td>
                     <td className="px-6 py-4">
                       <button 
