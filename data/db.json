@@ -1,7 +1,7 @@
 {
   "expenses": [
     {
-      "id": 1,
+      "id": "1",
       "expense": "Apple MacBook Pro 17",
       "description": "Silver",
       "category": "Laptop",
@@ -9,7 +9,7 @@
       "date": "2025-04-10"
     },
     {
-      "id": 2,
+      "id": "2",
       "expense": "Microsoft Surface Pro",
       "description": "White",
       "category": "Laptop PC",
@@ -17,7 +17,7 @@
       "date": "2025-04-12"
     },
     {
-      "id": 3,
+      "id": "3",
       "expense": "Sony Alpha 7R IV",
       "description": "Mirror-less Camera",
       "category": "Camera",
@@ -25,20 +25,12 @@
       "date": "2025-05-10"
     },
     {
-      "id": 4,
+      "id": "4",
       "expense": "Printer Paper",
       "description": "Office Supplies",
       "category": "Office Supplies",
       "price": 500,
       "date": "2025-06-12"
-    },
-    {
-      "expense": "Meals",
-      "description": "Chapo and Tea",
-      "category": "Food",
-      "price": 80,
-      "date": "2025-04-05",
-      "id": 5
     }
   ]
 }

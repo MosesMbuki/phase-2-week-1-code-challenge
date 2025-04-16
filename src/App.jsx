@@ -1,12 +1,9 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2'
+import './App.css';
 
 function App() {
-  // const [expenses, setExpenses] = useState([
-  //   { id: 1, expense: 'Apple MacBook Pro 17"', description: 'Silver', category: 'Laptop', price: 299999, date: '2025-04-10' },
-  //   { id: 2, expense: 'Microsoft Surface Pro', description: 'White', category: 'Laptop PC', price: 199999, date: '2025-04-12' }
-  // ]);
-  
+  const [expenses, setExpenses] = useState([]);
   const [formData, setFormData] = useState({
     expense: '',
     description: '',
@@ -15,9 +12,9 @@ function App() {
     date: ''
   });
 
-    // Fetch expenses from db.json
+  // Fetch expenses from db.json
   useEffect(() => {
-    fetch('http://localhost:3000/expenses')
+    fetch('https://phase-2-wk-1-code-challenge-1.onrender.com/expenses')
       .then(response => response.json())
       .then(data => setExpenses(data))
       .catch(error => console.error('Error fetching data:', error));
@@ -30,45 +27,48 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3000/expenses', {
+    
+    // POST new expense to db.json
+    fetch('https://phase-2-wk-1-code-challenge-1.onrender.com/expenses', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify({
+        ...formData,
+        price: parseFloat(formData.price),
+        id: expenses.length + 1
+      }),
     })
     .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-    // Add new expense to the state
-    // const newExpense = {
-    //   id: expenses.length + 1,
-    //   expense: formData.expense,
-    //   description: formData.description,
-    //   category: formData.category,
-    //   price: parseFloat(formData.price),
-    //   date: formData.date
-    // };
-    // setExpenses([...expenses, newExpense]);
-    // setFormData({ expense: '', description: '', category: '', price: '', date: '' });
+    .then(newExpense => {
+      setExpenses([...expenses, newExpense]);
+      setFormData({ expense: '', description: '', category: '', price: '', date: '' });
+    })
+         Swal.fire({
+        title: "Success!",
+        text: "Expense added successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+       
+         })
+           
+    .catch(error => console.error('Error adding expense:', error));
   };
 
   const deleteExpense = (id) => {
-    fetch(`http://localhost:3000/expenses/${id}`, {
-      method: 'DELETE'
+    // DELETE expense from db.json
+    fetch(`https://phase-2-wk-1-code-challenge-1.onrender.com/expenses/${id}`, {
+      method: 'DELETE',
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    }
-    )
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-    // Remove expense from the state
-    // setExpenses(expenses.filter(expense => expense.id !== id));
+    .then(() => {
+      setExpenses(expenses.filter(expense => expense.id !== id));
+    })
+      
+      Swal.fire("Deleted successfully!")
+    .catch(error => console.error('Error deleting expense:', error));
   };
+  
 
   return (
     <div className="app-container">
@@ -139,7 +139,7 @@ function App() {
         </div>
         
         {/* Table Section - Right Side */}
-        <div className="table-wrapper">
+        <div className="table-wrapper"> 
           <div className="relative overflow-x-auto px-4 py-8 bg-white rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
