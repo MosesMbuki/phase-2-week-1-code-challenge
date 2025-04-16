@@ -11,7 +11,7 @@ Mock Backend	JSON Server (db.json)
 Deployment	Vercel (Frontend), Render (Backend)
 
 How to Run Locally 🚀
-1. Clone the Repository
+1.Fork and Clone the Repository
 
 Copy
 {git clone https://github.com/your-username/expense-tracker.git}
@@ -24,7 +24,7 @@ Copy
 
 Copy
 {npm run server}
-Runs on http://localhost:3001
+Runs on http://localhost:3000
 
 4. Start the React App
 
