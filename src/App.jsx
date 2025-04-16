@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [expenses, setExpenses] = useState([
-    { id: 1, expense: 'Apple MacBook Pro 17"', description: 'Silver', category: 'Laptop', price: 299999, date: '2025-04-10' },
-    { id: 2, expense: 'Microsoft Surface Pro', description: 'White', category: 'Laptop PC', price: 199999, date: '2025-04-12' }
-  ]);
+  // const [expenses, setExpenses] = useState([
+  //   { id: 1, expense: 'Apple MacBook Pro 17"', description: 'Silver', category: 'Laptop', price: 299999, date: '2025-04-10' },
+  //   { id: 2, expense: 'Microsoft Surface Pro', description: 'White', category: 'Laptop PC', price: 199999, date: '2025-04-12' }
+  // ]);
   
   const [formData, setFormData] = useState({
     expense: '',
@@ -15,6 +15,14 @@ function App() {
     date: ''
   });
 
+    // Fetch expenses from db.json
+  useEffect(() => {
+    fetch('http://localhost:3000/expenses')
+      .then(response => response.json())
+      .then(data => setExpenses(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -22,20 +30,44 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newExpense = {
-      id: expenses.length + 1,
-      expense: formData.expense,
-      description: formData.description,
-      category: formData.category,
-      price: parseFloat(formData.price),
-      date: formData.date
-    };
-    setExpenses([...expenses, newExpense]);
-    setFormData({ expense: '', description: '', category: '', price: '', date: '' });
+    fetch('http://localhost:3000/expenses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+    // Add new expense to the state
+    // const newExpense = {
+    //   id: expenses.length + 1,
+    //   expense: formData.expense,
+    //   description: formData.description,
+    //   category: formData.category,
+    //   price: parseFloat(formData.price),
+    //   date: formData.date
+    // };
+    // setExpenses([...expenses, newExpense]);
+    // setFormData({ expense: '', description: '', category: '', price: '', date: '' });
   };
 
   const deleteExpense = (id) => {
-    setExpenses(expenses.filter(expense => expense.id !== id));
+    fetch(`http://localhost:3000/expenses/${id}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    }
+    )
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+    // Remove expense from the state
+    // setExpenses(expenses.filter(expense => expense.id !== id));
   };
 
   return (
