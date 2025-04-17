@@ -1,47 +1,39 @@
-# React + Vite
-Expense Tracker App 📊
+# Expense Tracker App 📊
 A simple yet powerful Expense Tracker built with React + Vite and a mock backend using JSON Server. 
 
-Features ✨
-✅ Add Expenses – Log new expenses with details (name, description, price, date).
-✅ Delete Expenses – Remove unwanted entries.
+##Features ✨
+A user can;
+    ✅ Add Expenses – Log new expenses with details (name, description, price, date).
+    ✅ Delete Expenses – Remove unwanted entries.
 
 Frontend	React, Vite, Tailwind CSS
 Mock Backend	JSON Server (db.json)
 Deployment	Vercel (Frontend), Render (Backend)
 
-How to Run Locally 🚀
-1.Fork and Clone the Repository
+## How to Run Locally 🚀
 
-Copy
-{git clone https://github.com/your-username/expense-tracker.git}
+1. Fork and Clone the Repository
 cd expense-tracker
+
 2. Install Dependencies
-
-Copy
 {npm install}
-3. Start the Mock Backend (JSON Server)
 
-Copy
-{npm run server}
+4. Start the Mock Backend (JSON Server)
 Runs on http://localhost:3000
 
 4. Start the React App
-
-Copy
 {npm run dev}
-Runs on http://localhost:3000
 
-How It Works 🔧
-Adding an Expense
+### How It Works 🔧
+# Adding an Expense
 
 Fill the form → Submit → Saved in db.json.
 
-Deleting an Expense
+# Deleting an Expense
 
 Click Delete → Removes from db.json.
 
-WEBSITE LINK = {https://phase-2-wk-1-code-challenge.vercel.app/}
+## WEBSITE LINK = {https://phase-2-wk-1-code-challenge.vercel.app/}
 
 License 📜
 MIT © Moses M. Mutitu
