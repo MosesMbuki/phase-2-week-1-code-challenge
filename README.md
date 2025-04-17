@@ -21,7 +21,7 @@ cd expense-tracker
 4. Start the Mock Backend (JSON Server)
 Runs on http://localhost:3000
 
-4. Start the React App
+5. Start the React App
 {npm run dev}
 
 ### How It Works 🔧
@@ -29,11 +29,10 @@ Runs on http://localhost:3000
 
 Fill the form → Submit → Saved in db.json.
 
-# Deleting an Expense
+### Deleting an Expense
 
 Click Delete → Removes from db.json.
 
-## WEBSITE LINK = {https://phase-2-wk-1-code-challenge.vercel.app/}
 
 License 📜
 Copyright <2025> <Moses M. Mutitu>
